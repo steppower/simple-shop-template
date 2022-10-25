@@ -28,16 +28,13 @@
 <ul id="productline"></ul>
 </form>
 <script>
-window.addEventListener('load', function () {
-
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-
-    if (urlParams.has('url')) {
-        const url = urlParams.get('url');
-        window.location.replace(url);
-    }
-})
+if($_GET['url']){
+	$url = $_GET['url'];
+	if(substr( $url, 0, 4 ) !== "http")
+		$url = base64_decode(str_replace(PHP_EOL, "", $url));
+	header('Location: ' . $url, true, 303);
+   	die();
+}
 </script>
 
 
