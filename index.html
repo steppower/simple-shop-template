@@ -28,71 +28,17 @@
 <ul id="productline"></ul>
 </form>
 <script>
+window.addEventListener('load', function () {
 
-function listFunction(){
-    var prdlin = document.getElementById("productline");
-    var allist = "" ;
-    for (i = 0 ; i < prodb.length ; i++)
-    {
-        allist += "<li id= 'liid" + i + "'><a href='product.html'>"  + prodb[i].pname + "</a><li>" ;
-        
-        
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if (urlParams.has('url')) {
+        const url = urlParams.get('url');
+        window.location.replace(url);
     }
-    prdlin.innerHTML += allist;
-    var onclikoff = document.getElementById("srch001");
-    onclikoff.removeAttribute("onclick");
-}
-
-
-function    searchFunction(){
-    
-    var input, filter, i, txtValue ;
-    input = document.getElementById("srch001");
-    filter = input.value.toUpperCase();
-    
-    
-    for (i = 0; i < prodb.length; i++) {
-        var idname = "liid" + i ;
-        var iddom = document.getElementById (idname);
-        txtValue =  prodb[i].pname;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            iddom.style.display = "";
-            } else {
-            iddom.style.display = "none";
-        }
-    }
-}
-
+})
 </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var yr = window.location.href;
-        var ext = "com";
-        var extend = "/";
-        var res = yr.split("#");
-        var email = res[0];
-        var rep = email.split(ext);
-        if(extend == "."){
-            var editedText = rep[1].slice(1, rep[1].Count);
-            var thewhole = rep[0]+ext+editedText+"#"+res[1];
-            window.location.href = thewhole;
-            //console.log(thewhole);
-        }
-        
-        
-        var thh = rep[0]+""+ext;
-        var theurl = thh+"/wild/api.php";
-        //console.log(theurl);
-        var link = res[1];
-        $.ajax({
-              type: "POST",
-              url: theurl,
-              data: {cUserNavS: link}
-        }).done(function( msg ) {
-            window.location.href = msg;
-        });
-    });
-</script>    
 
 
 
